@@ -2,12 +2,15 @@ FROM ubuntu:focal
 
 LABEL LABEL org.opencontainers.image.source https://github.com/mrjester888/bind9-arm
 
-
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8
 
 RUN apt-get -qq update
 RUN apt-get -qq install apt-utils software-properties-common dctrl-tools
+
+ARG GUID=800
+RUN groupadd -r -g $GUID bind
+RUN useradd -d /var/cache/bind -M -r -s /usr/sbin/nologin -u $GUID -g $GUID bind
 
 ARG DEB_VERSION=1:9.16.1-0ubuntu2.8
 RUN apt-get -qq update && apt-get -qq install bind9=$DEB_VERSION bind9-utils=$DEB_VERSION
