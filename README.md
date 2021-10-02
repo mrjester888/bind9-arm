@@ -10,6 +10,6 @@ To simplify permissions when using bind mount volumes, the bind user is pre-crea
 Create a local user with the same UID/GID in the host OS for easy mapping of permissions
 
 ```
-groupadd -r -g $GUID bind
+groupadd -r -g 800 bind
 useradd -d /var/cache/bind -M -r -s /usr/sbin/nologin -u 800 -g 800 bind
 ```
